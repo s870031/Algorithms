@@ -1,19 +1,23 @@
+// Tim Chen
+
 #include <iostream>
 #include "sort.h"
+#include <math.h>
 using namespace std;
 
 int main()
 {
-    int array[6] = {3, 2, 1, 0, 6, 7};
-    int arraySize = sizeof(array)/sizeof(*array);
-    int *sarray = InsertionSort(array,arraySize);
+	int array[8] = {8,7,6,5,4,3,1,2};
+	int arraySize = sizeof(array)/sizeof(*array);
 
-    // == Output ==
-    cout << "Sorted Array: ";
-    for(int i=0; i<arraySize; i++)
-        cout << sarray[i] << " ";
-	
-    cout << endl;
+	MergeSort(array,arraySize); // get the sorted array
 
-    return 0;
+	// == Output ==
+	cout << "Sorted Array: ";
+	for(int i=0; i<arraySize; i++)
+		cout << array[i] << " ";
+
+	cout << endl;
+		
+	return 0;
 }
