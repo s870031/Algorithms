@@ -10,8 +10,7 @@
 /* Insertion sort: return a sorted array   */
 /*******************************************/
 using namespace std;
-vector<int> InsertionSort(vector<int> array)
-{
+vector<int> InsertionSort(vector<int> array) {
 	// Go through and insert every element in array
 	for (int i=1; i<array.size(); i++) {
 		int j=i;
@@ -23,6 +22,31 @@ vector<int> InsertionSort(vector<int> array)
 		}
 	}
 	return array;
+}
+/*******************************************/
+/* Selection sort: return a sorted array   */
+/*******************************************/
+vector<int> SelectionSort(vector<int> array) {
+	vector<int> sarray;
+	int currMin;
+	int minPos = 0;
+
+	while(array.size() > 0) {
+		currMin = INT_MAX;
+		// Find the minimum element
+		for(int i=0; i<array.size(); i++) {
+			if(array[i] < currMin) {
+				currMin = array[i];
+				minPos = i;
+			}
+		}
+		// Erase the seleted element from original 
+		// array 
+		array.erase(array.begin()+minPos);
+		// Push back to the sorted array
+		sarray.push_back(currMin);
+	}
+	return sarray;
 }
 
 /*******************************************/

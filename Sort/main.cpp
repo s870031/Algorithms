@@ -19,7 +19,7 @@ int main()
 	array.push_back(1);
 	array.push_back(2);
 
-	sarray = InsertionSort(array); // get the sorted array
+	sarray = SelectionSort(array); // get the sorted array
 
 	// == Output ==
 	cout << "Original Array: ";
