@@ -10,57 +10,59 @@
 /* Insertion sort: return a sorted array   */
 /*******************************************/
 using namespace std;
-int* InsertionSort(int array[],int arraySize)
+vector<int> InsertionSort(vector<int> array)
 {
-	for(int i=1; i<arraySize; i++)
-	{
-		int key = array[i];
-		int j = i - 1;
-		while(array[j]>key && j>=0)    // if the element is bigger than key
-		{
-			array[j+1] = array[j];       //   move element to the right
-			j--;                         //   index minus one
-		}
-		array[j+1] = key;              // insert the key to the position found
-	}
+	// Go through and insert every element in array
+	for (int i=1; i<array.size(); i++) {
+		int j=i;
 
+		// Insert the element to the right place
+		while(array[j] < array[j-1] && j>0) {
+			swap(array[j],array[j-1]);
+			j--;
+		}
+	}
 	return array;
 }
 
 /*******************************************/
 /* Merge sort: return a sorted array       */
 /*******************************************/
-int* MergeSort(int array[], int arraySize)
-{
-	int *leftArray, *rightArray;
-	int leftSize, rightSize;
-	leftSize = floor(arraySize/2);         leftArray  = new int [leftSize+1];
-	rightSize = ceil((double)arraySize/2); rightArray = new int [rightSize+1];
+vector<int> MergeSort(vector<int> array) {
+	vector<int> sarray;
 
-	if(arraySize == 1)                                 // Final Condition of Recursive funciton: 
-		return array;                                  // 	if is the only element return itself
-
-	for(int index=0; index<arraySize; index++)         // Divide array into two subarray
-	{
-		if(index < leftSize)                           //   from index 0 to floor(array size)-1
-			leftArray[index] = array[index];           //   	set the left array
-		else                                           // 	from index floor(array size)
-			rightArray[index-leftSize] = array[index]; //    	set the right array
+	if(array.size() <= 1) {
+		return array;
 	}
 
-	MergeSort(leftArray,leftSize);                   // Solve the left
-	MergeSort(rightArray,rightSize);                 // Solve the right	
+	// Divide
+	int mid = array.size() / 2;
+	vector<int> left,right;
+	for (int i=0; i<mid; i++) {
+		left.push_back(array[i]);
+	}
+	for (int i=mid; i<array.size(); i++) {
+		right.push_back(array[i]);
+	}
+	left = MergeSort(left);
+	right = MergeSort(right);
 
-	leftArray[leftSize] = INT_MAX;                   // Merge left and right array
-	rightArray[rightSize] = INT_MAX;
-	int leftIndex=0, rightIndex=0;
-	for(int index=0; index<arraySize; index++)
-	{
-		array[index] = (leftArray[leftIndex] <= rightArray[rightIndex])? 
-			leftArray[leftIndex++] : rightArray[rightIndex++];
+	// Conquer (Merge)
+	left.push_back(INT_MAX);
+	right.push_back(INT_MAX);	
+	int lp=0, rp=0;
+	while (sarray.size() < array.size()) {
+		if(left[lp] < right[rp]) {
+			sarray.push_back(left[lp]);
+			lp++;
+		}
+		else {
+			sarray.push_back(right[rp]);
+			rp++;
+		}
 	}
 
-	return array;
+	return sarray;
 }
 
 /*******************************************/

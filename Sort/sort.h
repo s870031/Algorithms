@@ -5,9 +5,9 @@
 using namespace std;
 
 /* return a sorted array by insertion sort */
-extern int* InsertionSort(int array[], int arraySize);
+extern vector<int> InsertionSort(vector<int> array);
 /* return a sorted array by merge sort */
-extern int* MergeSort(int array[], int arraySize);
+extern vector<int> MergeSort(vector<int> array);
 /* return a sorted array by quick sort */
 extern vector<int> QuickSort(vector<int> array);
 

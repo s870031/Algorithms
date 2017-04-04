@@ -8,9 +8,6 @@
 using namespace std;
 int main()
 {
-	/*int array[8] = {8,7,6,5,4,3,1,2};
-	int arraySize = sizeof(array)/sizeof(*array);*/
-
 	vector<int> array;
 	vector<int> sarray;
 	array.push_back(8);
@@ -22,7 +19,7 @@ int main()
 	array.push_back(1);
 	array.push_back(2);
 
-	sarray = QuickSort(array); // get the sorted array
+	sarray = InsertionSort(array); // get the sorted array
 
 	// == Output ==
 	cout << "Original Array: ";
