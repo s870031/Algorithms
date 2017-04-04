@@ -4,9 +4,12 @@
 //
 #include <math.h>
 #include <climits>
+#include <iostream>
+#include <vector>
 /*******************************************/
 /* Insertion sort: return a sorted array   */
 /*******************************************/
+using namespace std;
 int* InsertionSort(int array[],int arraySize)
 {
 	for(int i=1; i<arraySize; i++)
@@ -47,7 +50,7 @@ int* MergeSort(int array[], int arraySize)
 
 	MergeSort(leftArray,leftSize);                   // Solve the left
 	MergeSort(rightArray,rightSize);                 // Solve the right	
-  
+
 	leftArray[leftSize] = INT_MAX;                   // Merge left and right array
 	rightArray[rightSize] = INT_MAX;
 	int leftIndex=0, rightIndex=0;
@@ -58,4 +61,58 @@ int* MergeSort(int array[], int arraySize)
 	}
 
 	return array;
+}
+
+/*******************************************/
+/* Quick sort: return a sorted array       */
+/*******************************************/
+vector<int> QuickSort(vector<int> array) {
+	vector<int> sarray;
+	if (array.size() <= 1) {
+		return array;
+	}
+	else {
+		int pivot = array[0];
+		int i = 0; // pos of pivot
+		int j = array.size() - 1;
+
+		// move pivot to the right place
+		while(i != j) {
+			if (array[j] < pivot && i<j) {
+				swap(array[j],array[i]);
+				swap(i,j);
+				pivot = array[i];
+			}
+			else if (array[j] > pivot && i>j) {
+				swap(array[j],array[i]);
+				swap(i,j);
+				pivot = array[i];
+			}
+			j = (i<j)? j-1:j+1;
+		}
+		pivot = array[i];
+
+		// quick sort left and right
+		vector<int> left;
+		vector<int> right;
+		for(int id=0; id<i; id++){
+			left.push_back(array[id]);
+		}
+		for(int id=i+1; id<array.size(); id++) {
+			right.push_back(array[id]);
+		}
+
+		left = QuickSort(left);
+		right = QuickSort(right);	
+
+		// concatenate left, pivot, right
+		for(int id=0; id<left.size(); id++) {
+			sarray.push_back(left[id]);
+		}
+		sarray.push_back(pivot);
+		for(int id=0; id<right.size(); id++) {
+			sarray.push_back(right[id]);
+		}
+		return sarray;
+	}
 }

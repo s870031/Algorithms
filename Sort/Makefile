@@ -1,5 +1,5 @@
 CC = /usr/bin/g++
-CFLAGS = 
+CFLAGS = -g 
 LIBS = -lm
 
 sort: main.o sort.o
